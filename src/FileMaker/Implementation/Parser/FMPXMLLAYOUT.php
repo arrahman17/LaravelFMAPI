@@ -1,11 +1,10 @@
 <?php
-use App\FileMaker;
   class FileMaker_Parser_FMPXMLLAYOUT
 {
   var $Vd05b6ed7;
  var $Ve3ad9440;
 
-
+  
  var $V6a45a325;
  var $_fm;
  var $V5431b8d4;
@@ -13,11 +12,9 @@ use App\FileMaker;
  var $V191be3bd;
  var $V32e51cce;
 
-
+  
  var$V582ddd29;
-      private $inside_data;
-
-      function __construct(&$V0ab34ca9)
+ function __construct(&$V0ab34ca9)
  {
  $this->_fm =& $V0ab34ca9;
 }
@@ -25,19 +22,19 @@ use App\FileMaker;
  {
  if (empty($V0f635d0e)) {
  return new FileMaker_Error($this->_fm, 'Did not receive an XML document from the server.');
-}
+} 
  $this->V5431b8d4= xml_parser_create();
 xml_set_object($this->V5431b8d4, $this);
 xml_parser_set_option($this->V5431b8d4, XML_OPTION_CASE_FOLDING, false);
 xml_parser_set_option($this->V5431b8d4, XML_OPTION_TARGET_ENCODING, 'UTF-8');
 xml_set_element_handler($this->V5431b8d4, '_start', '_end');
-xml_set_character_data_handler($this->V5431b8d4, '_cdata');
+xml_set_character_data_handler($this->V5431b8d4, '_cdata'); 
  if (!@xml_parse($this->V5431b8d4, $V0f635d0e)) {
  return new FileMaker_Error(sprintf('XML error: %s at line %d',
  xml_error_string(xml_get_error_code($this->V5431b8d4)),
  xml_get_current_line_number($this->V5431b8d4)));
-}
- xml_parser_free($this->V5431b8d4);
+} 
+ xml_parser_free($this->V5431b8d4); 
  if (!empty($this->Vcb5e100e)) {
  return new FileMaker_Error($this->_fm, null, $this->Vcb5e100e);
 }
@@ -58,7 +55,7 @@ $V8fa14cdd->_impl->_valueList = $V77be71a4['valueList'] ? $V77be71a4['valueList'
 }
 }
  function _start($V3643b863, $Vb068931c, $V5d06e8a3)
- {
+ { 
  $V5d06e8a3 = $this->_fm->toOutputCharset($V5d06e8a3);
 switch ($Vb068931c) {
  case 'FIELD':
@@ -96,7 +93,7 @@ break;
  function _cdata($V3643b863, $V8d777f38)
  {
  if ($this->V32e51cce!== null && preg_match('|\S|', $V8d777f38)) {
-
+  
  if($this->inside_data){
  $V78656626 = $this->V6a45a325[$this->V32e51cce][$this->V582ddd29];
 $V8d777f38 = $V78656626 . $V8d777f38;
@@ -109,7 +106,7 @@ $this->inside_data = true;
 
  }
 
-
+	 
 	function associative_array_push(&$Vf1f713c9, $V34ec78fc) {
  if (is_array($V34ec78fc)) {
  foreach ($V34ec78fc as $V3c6e0b8a => $V2063c160) {

@@ -1,19 +1,4 @@
 <?php
-
-namespace App;
-use FileMaker_Command_Add;
-use FileMaker_Command_CompoundFind;
-use FileMaker_Command_Delete;
-use FileMaker_Command_Duplicate;
-use FileMaker_Command_Edit;
-use FileMaker_Command_Find;
-use FileMaker_Command_FindAll;
-use FileMaker_Command_FindAny;
-use FileMaker_Command_FindRequest;
-use FileMaker_Command_PerformScript;
-use FileMaker_Error;
-use FileMaker_Implementation;
-
 /**
  * FileMaker API for PHP
  *
@@ -56,7 +41,7 @@ define('FILEMAKER_FIND_FIELDMATCH', '==');
 
 /**#@+
  * Find logical operator constants.
-  * Use with the {@link FileMaker_Command_Find::setLogicalOperator()}
+  * Use with the {@link FileMaker_Command_Find::setLogicalOperator()}  
  * method.
 */
 define('FILEMAKER_FIND_AND', 'and');
@@ -77,7 +62,7 @@ define('FILEMAKER_RULE_TIME_FIELD', 8);
 /**#@-*/
 
 /**#@+
- * Sort direction constants.
+ * Sort direction constants. 
  * Use with the {@link FileMaker_Command_Find::addSortRule()} and
  * {@link FileMaker_Command_CompoundFind::addSortRule()} methods.
  */
@@ -93,11 +78,8 @@ define('FILEMAKER_LOG_INFO', 6);
 define('FILEMAKER_LOG_DEBUG', 7);
 /**#@-*/
 
-
-
-
 /**
- * Base FileMaker class. Defines database properties, connects to a database,
+ * Base FileMaker class. Defines database properties, connects to a database, 
  * and gets information about the API.
  *
  * @package FileMaker
@@ -133,7 +115,7 @@ class FileMaker
      */
     function getAPIVersion()
     {
-        return (new \FileMaker_Implementation)->getAPIVersion();
+        return FileMaker_Implementation::getAPIVersion();
     }
 
     /**
@@ -148,19 +130,19 @@ class FileMaker
     }
 
     /**
-     * FileMaker object constructor.
-     *
-     * If you want to use the constructor without specifying all the
-     *  parameters, pass in NULL for the parameters you want to omit.
-     * For example, to specify only the database name, username, and
+     * FileMaker object constructor. 
+     * 
+     * If you want to use the constructor without specifying all the 
+     *  parameters, pass in NULL for the parameters you want to omit. 
+     * For example, to specify only the database name, username, and 
      * password, but omit the hostspec, call the constructor as follows:
-     *
+     *  
      * <samp>
      * new FileMaker('DatabaseName', NULL, 'username', 'password');
      * </samp>
-     *
+     * 
      * @param string $database Name of the database to connect to.
-     * @param string $hostspec Hostspec of web server in FileMaker Server
+     * @param string $hostspec Hostspec of web server in FileMaker Server 
      *        deployment. Defaults to http://localhost, if set to NULL.
      * @param string $username Account name to log into database.
      * @param string $password Password for account.
@@ -195,7 +177,7 @@ class FileMaker
 
     /**
      * Returns an associative array of property name => property value for
-     * all current properties and their current values.
+     * all current properties and their current values. 
      *
      * This array enables PHP object introspection and debugging when necessary.
      *
@@ -221,9 +203,9 @@ class FileMaker
      * Creates a new FileMaker_Command_Add object.
      *
      * @param string $layout Layout to add a record to.
-     * @param array $values Associative array of field name => value pairs.
-     *        To set field repetitions, use a numerically indexed array for
-     *        the value of a field, with the numeric keys corresponding to the
+     * @param array $values Associative array of field name => value pairs. 
+     *        To set field repetitions, use a numerically indexed array for 
+     *        the value of a field, with the numeric keys corresponding to the 
      *        repetition number to set.
      *
      * @return FileMaker_Command_Add New Add command object.
@@ -238,10 +220,10 @@ class FileMaker
      *
      * @param string $layout Layout that the record is part of.
      * @param string $recordId ID of the record to edit.
-     * @param array $updatedValues Associative array of field name => value
-     *        pairs that contain the updated field values. To set field
-     *        repetitions, use a numerically indexed array for the value of a
-     *        field, with the numeric keys corresponding to the repetition
+     * @param array $updatedValues Associative array of field name => value 
+     *        pairs that contain the updated field values. To set field 
+     *        repetitions, use a numerically indexed array for the value of a 
+     *        field, with the numeric keys corresponding to the repetition 
      *        number to set.
      *
      * @return FileMaker_Command_Edit New Edit command object.
@@ -290,23 +272,23 @@ class FileMaker
     }
 
     /**
-     *
+     * 
      * Creates a new FileMaker_Command_CompoundFind object.
      *
      * @param string $layout Layout to find records in.
      *
-     * @return FileMaker_Command_CompoundFind New Compound Find Set command
+     * @return FileMaker_Command_CompoundFind New Compound Find Set command 
      *         object.
      */
     function &newCompoundFindCommand($layout)
     {
         return $this->_impl->newCompoundFindCommand($layout);
     }
-
+    
      /**
-     *
-     * Creates a new FileMaker_Command_FindRequest object. Add one or more
-     * Find Request objects to a {@link FileMaker_Command_CompoundFind} object,
+     * 
+     * Creates a new FileMaker_Command_FindRequest object. Add one or more 
+     * Find Request objects to a {@link FileMaker_Command_CompoundFind} object, 
      * then execute the Compound Find command.
      *
      * @param string $layout Layout to find records in.
@@ -317,7 +299,7 @@ class FileMaker
     {
         return $this->_impl->newFindRequest($layout);
     }
-
+    
     /**
      * Creates a new FileMaker_Command_FindAny object.
      *
@@ -349,7 +331,7 @@ class FileMaker
      * @param string $scriptName Name of the ScriptMaker script to run.
      * @param string $scriptParameters Any parameters to pass to the script.
      *
-     * @return FileMaker_Command_PerformScript New Perform Script command
+     * @return FileMaker_Command_PerformScript New Perform Script command 
      *         object.
      */
     function &newPerformScriptCommand($layout, $scriptName, $scriptParameters = null)
@@ -358,14 +340,14 @@ class FileMaker
     }
 
     /**
-     * Creates a new FileMaker_Record object.
-     *
-     * This method does not save the new record to the database.
-     * The record is not created on the Database Server until you call
-     * this record's commit() method. You must specify a layout name,
-     * and you can optionally specify an array of field values.
+     * Creates a new FileMaker_Record object. 
+     * 
+     * This method does not save the new record to the database. 
+     * The record is not created on the Database Server until you call 
+     * this record's commit() method. You must specify a layout name, 
+     * and you can optionally specify an array of field values. 
      * Individual field values can also be set in the new record object.
-     *
+     * 
      *
      * @param string $layout Layout to create a new record for.
      * @param array $fieldValues Initial values for the new record's fields.
@@ -417,8 +399,8 @@ class FileMaker
     }
 
     /**
-     * Returns an array of ScriptMaker scripts from the current database that
-     * are available with the current server settings and the current user
+     * Returns an array of ScriptMaker scripts from the current database that 
+     * are available with the current server settings and the current user 
      * name and password credentials.
      *
      * @return array|FileMaker_Error List of script names or an Error object.
@@ -442,18 +424,18 @@ class FileMaker
 
     /**
      * Returns the data for the specified container field.
-     * Pass in a URL string that represents the file path for the container
-     * field contents. For example, get the image data from a container field
-     * named 'Cover Image'. For a FileMaker_Record object named $record,
+     * Pass in a URL string that represents the file path for the container 
+     * field contents. For example, get the image data from a container field 
+     * named 'Cover Image'. For a FileMaker_Record object named $record, 
      * URL-encode the path returned by the getField() method.  For example:
-     *
+     * 
      * <samp>
      * <IMG src="img.php?-url=<?php echo urlencode($record->getField('Cover Image')); ?>">
      * </samp>
-     *
-     * Then as shown below in a line from img.php, pass the URL into
+     * 
+     * Then as shown below in a line from img.php, pass the URL into 
      * getContainerData() for the FileMaker object named $fm:
-     *
+     * 
      * <samp>
      * echo $fm->getContainerData($_GET['-url']);
      * </samp>
@@ -469,10 +451,10 @@ class FileMaker
 
     /**
      * Returns the fully qualified URL for the specified container field.
-     * Pass in a URL string that represents the file path for the container
-     * field contents. For example, get the URL for a container field
+     * Pass in a URL string that represents the file path for the container 
+     * field contents. For example, get the URL for a container field 
      * named 'Cover Image'.  For example:
-     *
+     * 
      * <samp>
      * <IMG src="<?php echo $fm->getContainerDataURL($record->getField('Cover Image')); ?>">
      * </samp>

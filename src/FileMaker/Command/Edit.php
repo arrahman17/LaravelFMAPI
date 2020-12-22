@@ -12,7 +12,7 @@
  * other intellectual property license or right is granted, either expressly or
  * by implication, by FileMaker.
  */
-use App\FileMaker;
+
 /**#@+
  * @ignore Include parent and delegate classes.
  */
@@ -40,13 +40,13 @@ class FileMaker_Command_Edit extends FileMaker_Command
      * Edit command constructor.
      *
      * @ignore
-     * @param FileMaker_Implementation $fm FileMaker_Implementation object the
+     * @param FileMaker_Implementation $fm FileMaker_Implementation object the 
      *        command was created by.
      * @param string $layout Layout the record is part of.
      * @param string $recordId ID of the record to edit.
-     * @param array $values Associative array of field name => value pairs.
-     *        To set field repetitions, use a numerically indexed array for
-     *        the value of a field, with the numeric keys corresponding to the
+     * @param array $values Associative array of field name => value pairs. 
+     *        To set field repetitions, use a numerically indexed array for 
+     *        the value of a field, with the numeric keys corresponding to the 
      *        repetition number to set.
      */
     function __construct($fm, $layout, $recordId, $updatedValues = array())
@@ -61,7 +61,6 @@ class FileMaker_Command_Edit extends FileMaker_Command
      * @param string $value Value for the field.
      * @param integer $repetition Field repetition number to set,
      *        Defaults to the first repetition.
-     * @return
      */
     function setField($field, $value, $repetition = 0)
     {
@@ -70,20 +69,19 @@ class FileMaker_Command_Edit extends FileMaker_Command
 
     /**
      * Sets the new value for a date, time, or timestamp field from a
-     * UNIX timestamp value.
+     * UNIX timestamp value. 
      *
-     * If the field is not a date or time field, then this method returns
+     * If the field is not a date or time field, then this method returns 
      * an Error object. Otherwise, returns TRUE.
      *
-     * If layout data for the target of this command has not already
+     * If layout data for the target of this command has not already 
      * been loaded, calling this method loads layout data so that
      * the type of the field can be checked.
      *
      * @param string $field Name of the field to set.
      * @param string $timestamp Timestamp value.
-     * @param integer $repetition Field repetition number to set.
+     * @param integer $repetition Field repetition number to set. 
      *        Defaults to the first repetition.
-     * @return FileMaker_Error
      */
     function setFieldFromTimestamp($field, $timestamp, $repetition = 0)
     {
@@ -93,14 +91,14 @@ class FileMaker_Command_Edit extends FileMaker_Command
     /**
      * Sets the modification ID for this command.
      *
-     * Before you edit a record, you can use the
-     * {@link FileMaker_Record::getModificationId()} method to get the record's
-     * modification ID. By specifying a modification ID when you execute an
-     * Edit command, you can make sure that you are editing the current version
-     * of a record. If the modification ID value you specify does not match the
-     * current modification ID value in the database, the Edit command is not
-     * allowed and an error code is returned.
-     *
+     * Before you edit a record, you can use the 
+     * {@link FileMaker_Record::getModificationId()} method to get the record's 
+     * modification ID. By specifying a modification ID when you execute an 
+     * Edit command, you can make sure that you are editing the current version 
+     * of a record. If the modification ID value you specify does not match the 
+     * current modification ID value in the database, the Edit command is not 
+     * allowed and an error code is returned. 
+     * 
      * @param integer $modificationId Modification ID.
      */
     function setModificationId($modificationId)

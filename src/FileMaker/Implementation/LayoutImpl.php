@@ -1,8 +1,5 @@
 <?php
-
-use App\FileMaker;
-
-require_once dirname(__FILE__) . '/../Field.php';
+  require_once dirname(__FILE__) . '/../Field.php';
 require_once dirname(__FILE__) . '/Parser/FMPXMLLAYOUT.php';
  class FileMaker_Layout_Implementation
 {
@@ -12,7 +9,7 @@ require_once dirname(__FILE__) . '/Parser/FMPXMLLAYOUT.php';
  var $_relatedSets = array();
  var $_valueLists = array();
 
-
+	 
  var $Vab234ad8 = array();
  var $_database;
  var $_extended = false;
@@ -66,9 +63,9 @@ if (FileMaker::isError($Vb4a88417)) {
 }
 return array_keys($this->_valueLists);
 }
-
+ 
  function getValueListTwoFields($V993fcb1e, $Vd33e904c = null){
-
+ 
  $Vb4a88417 = $this->loadExtendedInfo($Vd33e904c);
 if (FileMaker::isError($Vb4a88417)) {
  return $Vb4a88417;
@@ -87,7 +84,7 @@ return isset($this->_valueLists[$V993fcb1e]) ?
  $this->_valueLists[$V993fcb1e] : null;
 }
 
-
+  
  function getValueListsTwoFields($Vd33e904c = null)
  {
  $Vb4a88417 = $this->loadExtendedInfo($Vd33e904c);
@@ -107,7 +104,7 @@ return $this->_valueLists;
  function loadExtendedInfo($Vd33e904c = null)
  {
  if (!$this->_extended) {
-
+ 
  if($Vd33e904c != null){
  $V0f635d0e = $this->_fm->_execute(array('-db' => $this->_fm->getProperty('database'),
  '-lay' => $this->getName(),

@@ -1,8 +1,5 @@
 <?php
-
-use App\FileMaker;
-
-require_once dirname(__FILE__) . '/../Error/Validation.php';
+  require_once dirname(__FILE__) . '/../Error/Validation.php';
  require_once dirname(__FILE__) . '/../Result.php';
  class FileMaker_Command_Implementation {
 	 var $_fm;
@@ -18,12 +15,10 @@ require_once dirname(__FILE__) . '/../Error/Validation.php';
  var $_recordId;
  function __construct($V0ab34ca9, $Vc6140495) {
  $this->_fm =& $V0ab34ca9;
-$this->_layout = $Vc6140495;
+$this->_layout = $Vc6140495; 
  $this->V0b9a204c= $V0ab34ca9->getProperty('recordClass');
 }
-
-
-     function setResultLayout($Vc6140495) {
+ function setResultLayout($Vc6140495) {
  $this->V7a2db0ea= $Vc6140495;
 }
  function setScript($V2550889a, $V9b479e5e = null) {
@@ -44,17 +39,17 @@ $this->_preSortScriptParams = $V9b479e5e;
  function setRecordId($Va6ec9c02) {
  $this->_recordId = $Va6ec9c02;
 }
- function validate($V972bf3f0 = null) {
+ function validate($V972bf3f0 = null) {  
  if (!is_a($this, 'FileMaker_Command_Add_Implementation') && !is_a($this, 'FileMaker_Command_Edit_Implementation')) {
  return true;
 }
 $Vc6140495 = & $this->_fm->getLayout($this->_layout);
 if (FileMaker :: isError($Vc6140495)) {
  return $Vc6140495;
-}
+} 
  $Vcb5e100e = new FileMaker_Error_Validation($this->_fm);
-if ($V972bf3f0 === null) {
- foreach ($Vc6140495->getFields() as $V972bf3f0 => $V06e3d36f) {
+if ($V972bf3f0 === null) {   
+ foreach ($Vc6140495->getFields() as $V972bf3f0 => $V06e3d36f) {  
  if (!isset ($this->_fields[$V972bf3f0]) || !count($this->_fields[$V972bf3f0])) {
  $Vf09cc7ee = array (
  0 => null
@@ -66,11 +61,11 @@ foreach ($Vf09cc7ee as $V2063c160) {
  $Vcb5e100e = $V06e3d36f->validate($V2063c160, $Vcb5e100e);
 }
 }
-} else {
+} else { 
  $V06e3d36f = & $Vc6140495->getField($V972bf3f0);
 if (FileMaker :: isError($V06e3d36f)) {
  return $V06e3d36f;
-}
+}  
  if (!isset ($this->_fields[$V972bf3f0]) || !count($this->_fields[$V972bf3f0])) {
  $Vf09cc7ee = array (
  0 => null
@@ -81,7 +76,7 @@ if (FileMaker :: isError($V06e3d36f)) {
 foreach ($Vf09cc7ee as $V2063c160) {
  $Vcb5e100e = $V06e3d36f->validate($V2063c160, $Vcb5e100e);
 }
-}
+}  
  return $Vcb5e100e->numErrors() ? $Vcb5e100e : true;
 }
  function & _getResult($V0f635d0e) {
@@ -97,10 +92,10 @@ if (FileMaker :: isError($Vb4a88417)) {
 }
 return $Vd1fc8eaf;
 }
- function _getCommandParams() {
+ function _getCommandParams() { 
  $V21ffce5b = array (
  '-db' => $this->_fm->getProperty('database'
- ), '-lay' => $this->_layout);
+ ), '-lay' => $this->_layout); 
  foreach (array (
  '_script' => '-script',
  '_preReqScript' => '-script.prefind',
@@ -113,7 +108,7 @@ if ($this-> $Vb2145aac !== null) {
  $V21ffce5b[$Veca07335 . '.param'] = $this-> $Vb2145aac;
 }
 }
-}
+} 
  if ($this->V7a2db0ea) {
  $V21ffce5b['-lay.response'] = $this->V7a2db0ea;
 }

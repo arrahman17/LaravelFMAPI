@@ -1,8 +1,5 @@
 <?php
-
-use App\FileMaker;
-
-require_once dirname(__FILE__) . '/Parser/FMResultSet.php';
+  require_once dirname(__FILE__) . '/Parser/FMResultSet.php';
  class FileMaker_Implementation
 {
   var $V73ee434e = array('charset' => 'utf-8');
@@ -196,7 +193,7 @@ return $Vcb5e100e;
 return $V6e52c40b[0];
 }
  function &getLayout($Vf43ac2d2)
- {
+ { 
  static $V34d59fda = array();
 if (isset($V34d59fda[$Vf43ac2d2])) {
  return $V34d59fda[$Vf43ac2d2];
@@ -274,7 +271,7 @@ foreach ($V3643b863->V6e52c40b as $V0b2c082c) {
 return $V34d59fda;
 }
  function getContainerData($V9305b73d)
- {
+ { 
  if (!function_exists('curl_init')) {
  return new FileMaker_Error($this, 'cURL is required to use the FileMaker API.');
 }
@@ -286,11 +283,11 @@ $V572d4e42 = $this->getProperty('hostspec');
 if (substr($V572d4e42, -1, 1) == '/') {
  $V572d4e42 = substr($V572d4e42, 0, -1);
 }
-$V572d4e42 .= $V9305b73d;
- $V572d4e42 = htmlspecialchars_decode($V572d4e42);
+$V572d4e42 .= $V9305b73d; 
+ $V572d4e42 = htmlspecialchars_decode($V572d4e42); 
  $V572d4e42 = str_replace(" ", "%20", $V572d4e42);
 }
- $this->log('Request for ' . $V572d4e42, FILEMAKER_LOG_INFO);
+ $this->log('Request for ' . $V572d4e42, FILEMAKER_LOG_INFO); 
  $Vd88fc6ed = curl_init($V572d4e42);
 
  curl_setopt($Vd88fc6ed, CURLOPT_RETURNTRANSFER, true);
@@ -301,28 +298,28 @@ if (!headers_sent())
 $V81c939b1 = TRUE;
 curl_setopt($Vd88fc6ed, CURLOPT_HEADER, true);
 }
-$this->_setCurlWPCSessionCookie($Vd88fc6ed);
-
- if ($this->getProperty('username')) {
+$this->_setCurlWPCSessionCookie($Vd88fc6ed); 
+	
+ if ($this->getProperty('username')) { 
  $V313225f0 = base64_encode($this->getProperty('username'). ':' . $this->getProperty('password'));
 $V44914468 = array('Authorization: Basic ' . $V313225f0, 'X-FMI-PE-ExtendedPrivilege: IrG6U+Rx0F5bLIQCUb9gOw==');
 curl_setopt($Vd88fc6ed, CURLOPT_HTTPHEADER, $V44914468);
 }
 else {
  curl_setopt($Vd88fc6ed, CURLOPT_HTTPHEADER, array('X-FMI-PE-ExtendedPrivilege: IrG6U+Rx0F5bLIQCUb9gOw=='));
-}
+}     
  if ($V93da65a9 = $this->getProperty('curlOptions')) {
  foreach ($V93da65a9 as $Vef3e30e0 => $V2063c160) {
  curl_setopt($Vd88fc6ed, $Vef3e30e0, $V2063c160);
 }
-}
+}  
  $Vd1fc8eaf = curl_exec($Vd88fc6ed);
 $this->_setClientWPCSessionCookie($Vd1fc8eaf);
 if ($V81c939b1)
-{
-$Vd1fc8eaf = $this->_eliminateContainerHeader($Vd1fc8eaf);
+{		
+$Vd1fc8eaf = $this->_eliminateContainerHeader($Vd1fc8eaf); 
 }
- $this->log($Vd1fc8eaf, FILEMAKER_LOG_DEBUG);
+ $this->log($Vd1fc8eaf, FILEMAKER_LOG_DEBUG); 
  if ($V70106d0d = curl_errno($Vd88fc6ed)) {
  return new FileMaker_Error($this, 'Communication Error: (' . $V70106d0d . ') ' . curl_error($Vd88fc6ed));
 }
@@ -330,23 +327,23 @@ curl_close($Vd88fc6ed);
 return $Vd1fc8eaf;
 }
  function _execute($Vf7cc8e48, $Vb3d1bd6a = 'fmresultset')
- {
+ { 
  if (!function_exists('curl_init')) {
  return new FileMaker_Error($this, 'cURL is required to use the FileMaker API.');
-}
+} 
  $Ve0c6dcf8 = array();
 foreach ($Vf7cc8e48 as $V3c6e0b8a => $V3a6d0284) {
  if (strtolower($this->getProperty('charset')) != 'utf-8' && $V3a6d0284 !== true) {
  $V3a6d0284 = utf8_encode($V3a6d0284);
 }
 $Ve0c6dcf8[] = urlencode($V3c6e0b8a) . ($V3a6d0284 === true ? '' : '=' . urlencode($V3a6d0284));
-}
+} 
  $V572d4e42 = $this->getProperty('hostspec');
 if (substr($V572d4e42, -1, 1) != '/') {
  $V572d4e42 .= '/';
 }
-$V572d4e42 .= 'fmi/xml/' . $Vb3d1bd6a . '.xml';
- $this->log('Request for ' . $V572d4e42, FILEMAKER_LOG_INFO);
+$V572d4e42 .= 'fmi/xml/' . $Vb3d1bd6a . '.xml'; 
+ $this->log('Request for ' . $V572d4e42, FILEMAKER_LOG_INFO); 
  $Vd88fc6ed = curl_init($V572d4e42);
 curl_setopt($Vd88fc6ed, CURLOPT_POST, true);
 curl_setopt($Vd88fc6ed, CURLOPT_RETURNTRANSFER, true);
@@ -357,9 +354,9 @@ if (!headers_sent())
 $V81c939b1 = TRUE;
 curl_setopt($Vd88fc6ed, CURLOPT_HEADER, true);
 }
-$this->_setCurlWPCSessionCookie($Vd88fc6ed);
-
- if ($this->getProperty('username')) {
+$this->_setCurlWPCSessionCookie($Vd88fc6ed); 
+	
+ if ($this->getProperty('username')) { 
  $V313225f0 = base64_encode(utf8_decode($this->getProperty('username')). ':' . utf8_decode($this->getProperty('password')));
 $V44914468 = 'Authorization: Basic ' . $V313225f0;
 curl_setopt($Vd88fc6ed, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded; charset=utf-8', 'X-FMI-PE-ExtendedPrivilege: IrG6U+Rx0F5bLIQCUb9gOw==', $V44914468));
@@ -367,24 +364,24 @@ curl_setopt($Vd88fc6ed, CURLOPT_HTTPHEADER, array('Content-Type: application/x-w
  curl_setopt($Vd88fc6ed, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded; charset=utf-8', 'X-FMI-PE-ExtendedPrivilege: IrG6U+Rx0F5bLIQCUb9gOw=='));
 }
 
- curl_setopt($Vd88fc6ed, CURLOPT_POSTFIELDS, implode('&', $Ve0c6dcf8));
+ curl_setopt($Vd88fc6ed, CURLOPT_POSTFIELDS, implode('&', $Ve0c6dcf8));     
  if ($V93da65a9 = $this->getProperty('curlOptions')) {
  foreach ($V93da65a9 as $Vef3e30e0 => $V2063c160) {
  curl_setopt($Vd88fc6ed, $Vef3e30e0, $V2063c160);
 }
-}
+}  
  $Vd1fc8eaf = curl_exec($Vd88fc6ed);
 $this->_setClientWPCSessionCookie($Vd1fc8eaf);
 if ($V81c939b1)
-{
-$Vd1fc8eaf = $this->_eliminateXMLHeader($Vd1fc8eaf);
+{		
+$Vd1fc8eaf = $this->_eliminateXMLHeader($Vd1fc8eaf); 
 }
- $this->log($Vd1fc8eaf, FILEMAKER_LOG_DEBUG);
+ $this->log($Vd1fc8eaf, FILEMAKER_LOG_DEBUG); 
  if ($V70106d0d = curl_errno($Vd88fc6ed)) {
-
+ 
  if($V70106d0d == 52){
  return new FileMaker_Error($this, 'Communication Error: (' . $V70106d0d . ') ' . curl_error($Vd88fc6ed) . ' - The Web Publishing Core and/or FileMaker Server services are not running.', $V70106d0d);
-}else if($V70106d0d == 22){
+}else if($V70106d0d == 22){	
  if (stristr("50", curl_error($Vd88fc6ed))) {
  return new FileMaker_Error($this, 'Communication Error: (' . $V70106d0d . ') ' . curl_error($Vd88fc6ed) . ' - The Web Publishing Core and/or FileMaker Server services are not running.', $V70106d0d);
 }else{
@@ -416,7 +413,7 @@ return $Va351dce6;
 function _setCurlWPCSessionCookie($Vd88fc6ed)
  {
  if (isset($_COOKIE["WPCSessionID"])) {
- $Vd06f6e6e = $_COOKIE["WPCSessionID"];
+ $Vd06f6e6e = $_COOKIE["WPCSessionID"]; 
  if (!is_null($Vd06f6e6e)) {
  $V0fbf52c7 = "WPCSessionID=".$Vd06f6e6e;
 curl_setopt($Vd88fc6ed, CURLOPT_COOKIE, $V0fbf52c7);
@@ -464,6 +461,6 @@ return substr($Vd1fc8eaf, $V81c939b1+$V04d77ddd);
 else
 {
 return $Vd1fc8eaf;
-}
+} 
 }
 }

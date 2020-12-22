@@ -1,11 +1,8 @@
 <?php
-
-use App\FileMaker;
-
-require_once dirname(__FILE__) . './../../Layout.php';
-require_once dirname(__FILE__) . './../../RelatedSet.php';
-require_once dirname(__FILE__) . './../../Record.php';
-require_once dirname(__FILE__) . './../../Field.php';
+  require_once dirname(__FILE__) . '/../../Layout.php';
+require_once dirname(__FILE__) . '/../../RelatedSet.php';
+require_once dirname(__FILE__) . '/../../Record.php';
+require_once dirname(__FILE__) . '/../../Field.php';
  class FileMaker_Parser_FMResultSet
 {
   var $Vcb5e100e;
@@ -33,23 +30,23 @@ require_once dirname(__FILE__) . './../../Field.php';
  {
  if (empty($V0f635d0e)) {
  return new FileMaker_Error($this->_fm, 'Did not receive an XML document from the server.');
-}
+} 
  $this->V5431b8d4= xml_parser_create('UTF-8');
 xml_set_object($this->V5431b8d4, $this);
 xml_parser_set_option($this->V5431b8d4, XML_OPTION_CASE_FOLDING, false);
 xml_parser_set_option($this->V5431b8d4, XML_OPTION_TARGET_ENCODING, 'UTF-8');
 xml_set_element_handler($this->V5431b8d4, '_start', '_end');
-xml_set_character_data_handler($this->V5431b8d4, '_cdata');
+xml_set_character_data_handler($this->V5431b8d4, '_cdata'); 
  if (!@xml_parse($this->V5431b8d4, $V0f635d0e)) {
  return new FileMaker_Error($this->_fm,
  sprintf('XML error: %s at line %d',
  xml_error_string(xml_get_error_code($this->V5431b8d4)),
  xml_get_current_line_number($this->V5431b8d4)));
-}
- xml_parser_free($this->V5431b8d4);
+} 
+ xml_parser_free($this->V5431b8d4); 
  if (!empty($this->Vcb5e100e)) {
  return new FileMaker_Error($this->_fm, null, $this->Vcb5e100e);
-}
+}  
  if (version_compare($this->Vf5bf48aa['version'], FileMaker::getMinServerVersion(), '<')) {
  return new FileMaker_Error($this->_fm, 'This API requires at least version ' . FileMaker::getMinServerVersion() . ' of FileMaker Server to run (detected ' . $this->Vf5bf48aa['version'] . ').');
 }
@@ -64,12 +61,12 @@ return true;
 if ($this->_result) {
  $Vb4a88417 =& $this->_result;
 return true;
-}
+} 
  $Vb4a88417->_impl->_layout = new FileMaker_Layout($this->_fm);
-$this->setLayout($Vb4a88417->_impl->_layout);
+$this->setLayout($Vb4a88417->_impl->_layout); 
  $Vb4a88417->_impl->_tableCount = $this->V1ea7e575['total-count'];
 $Vb4a88417->_impl->_foundSetCount = $this->Vaae0d98d['count'];
-$Vb4a88417->_impl->_fetchCount = $this->Vaae0d98d['fetch-size'];
+$Vb4a88417->_impl->_fetchCount = $this->Vaae0d98d['fetch-size']; 
  $V6e52c40b = array();
 foreach ($this->V6e52c40b as $Vde17f0f2) {
  $V4b43b0ae = new $V561b2299($Vb4a88417->_impl->_layout);
@@ -113,7 +110,7 @@ $V8fa14cdd->_impl->_autoEntered = (bool)($V06e3d36f['auto-enter'] == 'yes');
 $V8fa14cdd->_impl->_global = (bool)($V06e3d36f['global'] == 'yes');
 $V8fa14cdd->_impl->_maxRepeat = (int)$V06e3d36f['max-repeat'];
 $V8fa14cdd->_impl->_result = $V06e3d36f['result'];
-$V8fa14cdd->_impl->_type = $V06e3d36f['type'];
+$V8fa14cdd->_impl->_type = $V06e3d36f['type']; 
  if ($V06e3d36f['not-empty'] == 'yes') {
  $V8fa14cdd->_impl->_validationRules[FILEMAKER_RULE_NOTEMPTY] = true;
 $V8fa14cdd->_impl->_validationMask |= FILEMAKER_RULE_NOTEMPTY;
@@ -159,7 +156,7 @@ $V8fa14cdd->_impl->_autoEntered = (bool)($V06e3d36f['auto-enter'] == 'yes');
 $V8fa14cdd->_impl->_global = (bool)($V06e3d36f['global'] == 'yes');
 $V8fa14cdd->_impl->_maxRepeat = (int)$V06e3d36f['max-repeat'];
 $V8fa14cdd->_impl->_result = $V06e3d36f['result'];
-$V8fa14cdd->_impl->_type = $V06e3d36f['type'];
+$V8fa14cdd->_impl->_type = $V06e3d36f['type']; 
  if ($V06e3d36f['not-empty'] == 'yes') {
  $V8fa14cdd->_impl->_validationRules[FILEMAKER_RULE_NOTEMPTY] = true;
 $V8fa14cdd->_impl->_validationMask |= FILEMAKER_RULE_NOTEMPTY;
@@ -201,7 +198,7 @@ $this->_layout =& $Vc6140495;
 return true;
 }
  function _start($V3643b863, $Vb068931c, $V5d06e8a3)
- {
+ { 
  $V5d06e8a3 = $this->_fm->toOutputCharset($V5d06e8a3);
 switch ($Vb068931c) {
  case 'error':

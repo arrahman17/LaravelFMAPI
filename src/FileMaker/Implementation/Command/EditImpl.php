@@ -1,8 +1,5 @@
 <?php
-
-use App\FileMaker;
-
-require_once dirname(__FILE__) . '/../CommandImpl.php';
+  require_once dirname(__FILE__) . '/../CommandImpl.php';
  class FileMaker_Command_Edit_Implementation extends FileMaker_Command_Implementation {
 	 var $_fields = array ();
  var $_modificationId = null;
@@ -20,18 +17,18 @@ foreach ($Va0af1e2b as $V06e3d36f => $V2063c160) {
 $this->_fields[$V06e3d36f] = $V2063c160;
 }
 }
- function & execute() {
- $V21ffce5b = $this->_getCommandParams();
+ function & execute() { 
+ $V21ffce5b = $this->_getCommandParams(); 
  if (empty ($this->_recordId)) {
  $Vcb5e100e = new FileMaker_Error($this->_fm, 'Edit commands require a record id.');
 return $Vcb5e100e;
-}
- if (!count($this->_fields)) {
+} 
+ if (!count($this->_fields)) {  
  if ($this->V6d6e1fd2== null) {
  $Vcb5e100e = new FileMaker_Error($this->_fm, 'There are no changes to make.');
 return $Vcb5e100e;
 }
-}
+}  
 
 if ($this->_fm->getProperty('prevalidate')) {
 $Vcb5e111f = & $this->_fm->getLayout($this->_layout);
@@ -52,8 +49,8 @@ return $Vb0689411;
  $Vc6140495 = & $this->_fm->getLayout($this->_layout);
 if (FileMaker :: isError($Vc6140495)) {
  return $Vc6140495;
-}
- $V21ffce5b['-edit'] = true;
+} 
+ $V21ffce5b['-edit'] = true; 
  if ($this->V6d6e1fd2== null) {
  foreach ($this->_fields as $V972bf3f0 => $Vee0525e4) {
  if (strpos($V972bf3f0, '.') !== false) {
@@ -78,15 +75,15 @@ foreach ($Vee0525e4 as $V6a992d55 => $V3a6d0284) {
 }
 if ($this->V6d6e1fd2!= null) {
  $V21ffce5b['-delete.related'] = $this->V6d6e1fd2;
-}
- $V21ffce5b['-recid'] = $this->_recordId;
+} 
+ $V21ffce5b['-recid'] = $this->_recordId; 
  if ($this->_modificationId) {
  $V21ffce5b['-modid'] = $this->_modificationId;
-}
+} 
  $V0f635d0e = $this->_fm->_execute($V21ffce5b);
 if (FileMaker :: isError($V0f635d0e)) {
  return $V0f635d0e;
-}
+} 
  return $this->_getResult($V0f635d0e);
 }
  function setField($V06e3d36f, $V2063c160, $V6d786dc7 = 0) {

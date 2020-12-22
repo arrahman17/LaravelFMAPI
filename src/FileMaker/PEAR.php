@@ -571,7 +571,6 @@ class PEAR
      *
      * @param string $message
      *
-     * @return object
      */
     function &throwError($message = null,
                          $code = null,
@@ -843,8 +842,8 @@ class PEAR_Error
      * @access public
      *
      */
-    function __construct($message = 'unknown error', $code = null,
-                         $mode = null, $options = null, $userinfo = null)
+    function PEAR_Error($message = 'unknown error', $code = null,
+                        $mode = null, $options = null, $userinfo = null)
     {
         if ($mode === null) {
             $mode = PEAR_ERROR_RETURN;
@@ -854,7 +853,7 @@ class PEAR_Error
         $this->mode      = $mode;
         $this->userinfo  = $userinfo;
         if (function_exists("debug_backtrace")) {
-            if (@!(new PEAR)->getStaticProperty('PEAR_Error', 'skiptrace')) {
+            if (@!PEAR::getStaticProperty('PEAR_Error', 'skiptrace')) {
                 $this->backtrace = debug_backtrace();
             }
         }

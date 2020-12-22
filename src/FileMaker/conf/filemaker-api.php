@@ -1,5 +1,4 @@
 <?php
-
 /**
  * FileMaker API for PHP configuration file.
  *

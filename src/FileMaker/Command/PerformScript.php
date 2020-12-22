@@ -12,7 +12,6 @@
  * other intellectual property license or right is granted, either expressly or
  * by implication, by FileMaker.
  */
-use App\FileMaker;
 
 /**#@+
  * @ignore Include parent and delegate classes.
@@ -41,13 +40,13 @@ class FileMaker_Command_PerformScript extends FileMaker_Command
      * PerformScript command constructor.
      *
      * @ignore
-     * @param FileMaker_Implementation $fm FileMaker_Implementation object the
+     * @param FileMaker_Implementation $fm FileMaker_Implementation object the 
      *        command was created by.
      * @param string $layout Layout to use for script context.
      * @param string $scriptName Name of the script to run.
      * @param string $scriptParameters Any parameters to pass to the script.
      */
-    function __construct($fm, $layout, $scriptName, $scriptParameters = null)
+    function FileMaker_Command_PerformScript($fm, $layout, $scriptName, $scriptParameters = null)
     {
         $this->_impl = new FileMaker_Command_PerformScript_Implementation($fm, $layout, $scriptName, $scriptParameters);
     }

@@ -1,5 +1,4 @@
 <?php
-use App\FileMaker;
 /**
  * FileMaker API for PHP
  *
@@ -62,13 +61,13 @@ class FileMaker_Field
      *
      * @return FileMaker_Layout Layout object.
      */
-    function getLayout()
+    function &getLayout()
     {
-        return $layout = $this->_impl->getLayout();
+        return $layout =& $this->_impl->getLayout();
     }
 
     /**
-     * Returns TRUE if data in this field is auto-entered or FALSE
+     * Returns TRUE if data in this field is auto-entered or FALSE 
      * if it is entered manually.
      *
      * @return boolean Auto-entered status of this field.
@@ -104,14 +103,14 @@ class FileMaker_Field
      * failed.
      *
      * @param mixed $value Value to pre-validate.
-     * @param FileMaker_Error_Validation $error If pre-validation is being
-     *        done on more than one field, you may pass validate() an existing
-     *        error object to add pre-validation failures to.$error is not
-     *        passed by reference, though, so you must catch the return value
-     *        of validate() and use it as the new $error object. This method
+     * @param FileMaker_Error_Validation $error If pre-validation is being 
+     *        done on more than one field, you may pass validate() an existing 
+     *        error object to add pre-validation failures to.$error is not 
+     *        passed by reference, though, so you must catch the return value 
+     *        of validate() and use it as the new $error object. This method 
      *        never overwrites an existing $error object with boolean TRUE.
      *
-     * @return boolean|FileMaker_Error_Validation Result of field
+     * @return boolean|FileMaker_Error_Validation Result of field 
      *         pre-validation on $value.
      */
     function validate($value, $error = null)
@@ -120,10 +119,10 @@ class FileMaker_Field
     }
 
     /**
-     * Returns an array of FILEMAKER_RULE_* constants for each rule
-     * set on this field that can be evaluated by the PHP engine.
-     *
-     * Rules such as "unique" and "exists" can only be pre-validated on the
+     * Returns an array of FILEMAKER_RULE_* constants for each rule 
+     * set on this field that can be evaluated by the PHP engine. 
+     * 
+     * Rules such as "unique" and "exists" can only be pre-validated on the 
      * Database Server and are not included in this list.
      *
      * @return array Local rule array.
@@ -134,7 +133,7 @@ class FileMaker_Field
     }
 
     /**
-     * Returns an array of FILEMAKER_RULE_* constants for each rule
+     * Returns an array of FILEMAKER_RULE_* constants for each rule 
      * set on this field.
      *
      * @return array Rule array.
@@ -169,15 +168,15 @@ class FileMaker_Field
     }
 
     /**
-     * Returns any additional information for the specified pre-validation
-     * rule.
+     * Returns any additional information for the specified pre-validation 
+     * rule. 
      *
-     * Used for range rules and other rules that have additional
+     * Used for range rules and other rules that have additional 
      * pre-validation parameters.
      *
-     * @param integer $validationRule FILEMAKER_RULE_* constant
-     *        to get information for.
-     *
+     * @param integer $validationRule FILEMAKER_RULE_* constant 
+     *        to get information for. 
+     * 
      * @return array Any extra information for $validationRule.
      */
     function describeValidationRule($validationRule)
@@ -186,17 +185,17 @@ class FileMaker_Field
     }
 
     /**
-     * Return an array of arrays containing the extra information for
-     * all pre-validation rules on this field that can be evaluated by the
-     * PHP engine.
-     *
-     * Rules such as "unique" and "exists" can be validated only
-     * on the Database Server and are not included in this list.
-     * Indexes of the outer array are FILEMAKER_RULE_* constants,
+     * Return an array of arrays containing the extra information for 
+     * all pre-validation rules on this field that can be evaluated by the 
+     * PHP engine. 
+     * 
+     * Rules such as "unique" and "exists" can be validated only 
+     * on the Database Server and are not included in this list. 
+     * Indexes of the outer array are FILEMAKER_RULE_* constants, 
      * and values are the same array returned by describeValidationRule().
      *
-     * @return array An associative array of all extra pre-validation
-     *         information, with rule constants as indexes and extra
+     * @return array An associative array of all extra pre-validation 
+     *         information, with rule constants as indexes and extra 
      *         information as the values.
      */
     function describeLocalValidationRules()
@@ -207,8 +206,8 @@ class FileMaker_Field
     /**
      * Returns any additional information for all pre-validation rules.
      *
-     * @return array An associative array of all extra pre-validation
-     *         information, with FILEMAKER_RULE_* constants
+     * @return array An associative array of all extra pre-validation 
+     *         information, with FILEMAKER_RULE_* constants 
      *         as keys and extra information as the values.
      */
     function describeValidationRules()
@@ -239,14 +238,14 @@ class FileMaker_Field
     }
 
     /**
-     * Returns the list of choices from the value list associated with this
-     * field.
+     * Returns the list of choices from the value list associated with this 
+     * field. 
      *
-     * If this field is not associated with a value list, this method returns
+     * If this field is not associated with a value list, this method returns 
      * NULL.
      *
      * @param string  $recid Record from which to display the value list.
-     *
+     * 
      * @return array Value list array.
      */
     function getValueList($recid = null)
@@ -255,7 +254,7 @@ class FileMaker_Field
     }
 
     /**
-     * Returns the control style type of this field -- for example,
+     * Returns the control style type of this field -- for example, 
      * 'EDITTEXT', 'POPUPLIST', 'POPUPMENU', 'CHECKBOX', 'RADIOBUTTONS' or
      * 'CALENDAR'.
      *

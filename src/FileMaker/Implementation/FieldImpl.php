@@ -1,8 +1,5 @@
 <?php
-
-use App\FileMaker;
-
-require_once dirname(__FILE__) . '/../Error/Validation.php';
+  require_once dirname(__FILE__) . '/../Error/Validation.php';
  class FileMaker_Field_Implementation
 {
   var $_layout;
@@ -73,7 +70,7 @@ break;
 case FILEMAKER_RULE_TIME_FIELD :
  if (!empty ($V2063c160)) {
  if (!$this->checkTimeFormat($V2063c160)) {
-
+ 
  $Vcb5e100e->addError($this, $V981c1e7b, $V2063c160);
 } else {
  $this->checkTimeValidity($V2063c160, $V981c1e7b, $Vcb5e100e, FALSE);
@@ -83,7 +80,7 @@ break;
 case FILEMAKER_RULE_TIMESTAMP_FIELD :
  if (!empty ($V2063c160)) {
  if (!$this->checkTimeStampFormat($V2063c160)) {
-
+ 
  $Vcb5e100e->addError($this, $V981c1e7b, $V2063c160);
 } else {
  $this->checkDateValidity($V2063c160, $V981c1e7b, $Vcb5e100e);
@@ -94,7 +91,7 @@ break;
 case FILEMAKER_RULE_DATE_FIELD :
  if (!empty ($V2063c160)) {
  if (!$this->checkDateFormat($V2063c160)) {
-
+ 
  $Vcb5e100e->addError($this, $V981c1e7b, $V2063c160);
 } else {
  $this->checkDateValidity($V2063c160, $V981c1e7b, $Vcb5e100e);
@@ -104,22 +101,22 @@ break;
 case FILEMAKER_RULE_FOURDIGITYEAR :
  if (!empty ($V2063c160)) {
  switch ($this->_result) {
- case 'timestamp' :
- if ($this->checkTimeStampFormatFourDigitYear($V2063c160)) {
+ case 'timestamp' : 
+ if ($this->checkTimeStampFormatFourDigitYear($V2063c160)) { 
  preg_match('#^([0-9]{1,2})[-,/,\\\\]([0-9]{1,2})[-,/,\\\\]([0-9]{4})#', $V2063c160, $V9c28d32d);
 $V7436f942 = $V9c28d32d[1];
 $V628b7db0 = $V9c28d32d[2];
-$V84cdc76c = $V9c28d32d[3];
+$V84cdc76c = $V9c28d32d[3];  
  if ($V84cdc76c < 1 || $V84cdc76c > 4000) {
  $Vcb5e100e->addError($this, $V981c1e7b, $V2063c160);
 } else
  if (!checkdate($V7436f942, $V628b7db0, $V84cdc76c)) {
  $Vcb5e100e->addError($this, $V981c1e7b, $V2063c160);
-} else {
+} else { 
  $this->checkTimeValidity($V2063c160, $V981c1e7b, $Vcb5e100e, FALSE);
 }
 } else {
-
+ 
  $Vcb5e100e->addError($this, $V981c1e7b, $V2063c160);
 }
 break;
@@ -129,12 +126,12 @@ if (count($V78f0805f) != 3) {
  $Vcb5e100e->addError($this, $V981c1e7b, $V2063c160);
 } else {
  $V6c8f3f79 = strlen($V78f0805f[2]);
-if ($V6c8f3f79 != 4) {
+if ($V6c8f3f79 != 4) { 
  $Vcb5e100e->addError($this, $V981c1e7b, $V2063c160);
-} else {
+} else { 
  if ($V78f0805f[2] < 1 || $V78f0805f[2] > 4000) {
  $Vcb5e100e->addError($this, $V981c1e7b, $V2063c160);
-} else {
+} else { 
  if (!checkdate($V78f0805f[0], $V78f0805f[1], $V78f0805f[2])) {
  $Vcb5e100e->addError($this, $V981c1e7b, $V2063c160);
 }
@@ -142,29 +139,29 @@ if ($V6c8f3f79 != 4) {
 }
 }
 break;
-}
+} 
  }
 break;
 case FILEMAKER_RULE_TIMEOFDAY :
- if (!empty ($V2063c160)) {
- if ($this->checkTimeFormat($V2063c160)) {
+ if (!empty ($V2063c160)) { 
+ if ($this->checkTimeFormat($V2063c160)) { 
  $this->checkTimeValidity($V2063c160, $V981c1e7b, $Vcb5e100e, TRUE);
 } else {
-
+ 
  $Vcb5e100e->addError($this, $V981c1e7b, $V2063c160);
 }
 }
 break;
-}
- }
+} 
+ }   
  if ($V1c0c74f6) {
  return $Vcb5e100e;
-} else {
+} else {  
  return $Vcb5e100e->numErrors() ? $Vcb5e100e : true;
 }
 }
 
-	 function getLocalValidationRules()
+	 function getLocalValidationRules() 
 	{
  $V6b55d9ec = array ();
 foreach (array_keys($this->_validationRules) as $V981c1e7b) {
@@ -197,27 +194,27 @@ break;
 }
 return $V6b55d9ec;
 }
-function checkTimeStampFormatFourDigitYear($V2063c160)
+function checkTimeStampFormatFourDigitYear($V2063c160) 
 	{
  return (preg_match('#^[ ]*([0-9]{1,2})[-,/,\\\\]([0-9]{1,2})[-,/,\\\\]([0-9]{4})[ ]*([0-9]{1,2})[:]([0-9]{1,2})([:][0-9]{1,2})?([ ]*((AM|PM)|(am|pm)))?[ ]*$#', $V2063c160));
 }
-function checkTimeStampFormat($V2063c160)
+function checkTimeStampFormat($V2063c160) 
 	{
  return (preg_match('#^[ ]*([0-9]{1,2})[-,/,\\\\]([0-9]{1,2})([-,/,\\\\]([0-9]{1,4}))?[ ]*([0-9]{1,2})[:]([0-9]{1,2})([:][0-9]{1,2})?([ ]*((AM|PM)|(am|pm)))?[ ]*$#', $V2063c160));
 }
-function checkDateFormat($V2063c160)
+function checkDateFormat($V2063c160) 
 	{
  return (preg_match('#^[ ]*([0-9]{1,2})[-,/,\\\\]([0-9]{1,2})([-,/,\\\\]([0-9]{1,4}))?[ ]*$#', $V2063c160));
 }
-function checkTimeFormat($V2063c160)
+function checkTimeFormat($V2063c160) 
 	{
  return (preg_match('#^[ ]*([0-9]{1,2})[:]([0-9]{1,2})([:][0-9]{1,2})?([ ]*((AM|PM)|(am|pm)))?[ ]*$#', $V2063c160));
 }
-function checkNumericOnly($V2063c160)
+function checkNumericOnly($V2063c160) 
 	{
  return (!is_numeric($V2063c160));
 }
-function checkDateValidity($V2063c160, $V981c1e7b, $Vcb5e100e)
+function checkDateValidity($V2063c160, $V981c1e7b, $Vcb5e100e) 
 	{
  preg_match('#([0-9]{1,2})[-,/,\\\\]([0-9]{1,2})([-,/,\\\\]([0-9]{1,4}))?#', $V2063c160, $V78f0805f);
 if ($V78f0805f[4]) {
@@ -225,10 +222,10 @@ if ($V78f0805f[4]) {
 $V84cdc76c = $V78f0805f[4];
 if ($V6c8f3f79 != 4) {
  $V84cdc76c = $V84cdc76c +2000;
-}
+} 
  if ($V78f0805f[4] < 1 || $V78f0805f[4] > 4000) {
  $Vcb5e100e->addError($this, $V981c1e7b, $V2063c160);
-} else {
+} else { 
  if (!checkdate($V78f0805f[1], $V78f0805f[2], $V78f0805f[4])) {
  $Vcb5e100e->addError($this, $V981c1e7b, $V2063c160);
 }
@@ -240,20 +237,20 @@ if (!checkdate($V78f0805f[1], $V78f0805f[2], $V84cdc76c)) {
 }
 }
 }
-function checkTimeValidity($V2063c160, $V981c1e7b, $Vcb5e100e, $Vcaf85b7b)
+function checkTimeValidity($V2063c160, $V981c1e7b, $Vcb5e100e, $Vcaf85b7b) 
 	{
  $V52124c01 = 0;
 if ($Vcaf85b7b) {
  $V52124c01 = 12;
 } else {
  $V52124c01 = 24;
-}
+} 
  preg_match('#([0-9]{1,2})[:]([0-9]{1,2})[:]?([0-9]{1,2})?#', $V2063c160, $V9c28d32d);
 $V896c55cc = $V9c28d32d[1];
 $V640fd0cc = $V9c28d32d[2];
 if (count($V9c28d32d) >= 4) {
  $V783e8e29 = $V9c28d32d[3];
-}
+} 
  if ($V896c55cc < 0 || $V896c55cc > $V52124c01) {
  $Vcb5e100e->addError($this, $V981c1e7b, $V2063c160);
 } else if ($V640fd0cc < 0 || $V640fd0cc > 59) {
@@ -283,7 +280,7 @@ if (count($V9c28d32d) >= 4) {
 }
 return null;
 }
- function describeLocalValidationRules()
+ function describeLocalValidationRules() 
 	{
  $V6b55d9ec = array ();
 foreach ($this->_validationRules as $V981c1e7b => $V1dee80c7) {

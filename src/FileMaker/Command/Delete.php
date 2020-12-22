@@ -12,7 +12,6 @@
  * other intellectual property license or right is granted, either expressly or
  * by implication, by FileMaker.
  */
-use App\FileMaker;
 
 /**#@+
  * @ignore Include parent and delegate classes.
@@ -41,7 +40,7 @@ class FileMaker_Command_Delete extends FileMaker_Command
      * Delete command constructor.
      *
      * @ignore
-     * @param FileMaker_Implementation $fm FileMaker_Implementation object the
+     * @param FileMaker_Implementation $fm FileMaker_Implementation object the 
      *        command was created by.
      * @param string $layout Layout to delete record from.
      * @param string $recordId ID of the record to delete.

@@ -12,7 +12,6 @@
  * other intellectual property license or right is granted, either expressly or
  * by implication, by FileMaker.
  */
-use App\FileMaker;
 
 /**#@+
  * @ignore Include parent and delegate classes.
@@ -41,12 +40,12 @@ class FileMaker_Command_Duplicate extends FileMaker_Command
      * Duplicate command constructor.
      *
      * @ignore
-     * @param FileMaker_Implementation $fm FileMaker_Implementation object the
+     * @param FileMaker_Implementation $fm FileMaker_Implementation object the 
      *        command was created by.
      * @param string $layout Layout the record to duplicate is in.
      * @param string $recordId ID of the record to duplicate.
      */
-    function __construct($fm, $layout, $recordId)
+    function FileMaker_Command_Duplicate($fm, $layout, $recordId)
     {
         $this->_impl = new FileMaker_Command_Duplicate_Implementation($fm, $layout, $recordId);
     }

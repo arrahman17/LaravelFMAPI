@@ -1,8 +1,5 @@
 <?php
-
-use App\FileMaker;
-
-class FileMaker_Record_Implementation
+  class FileMaker_Record_Implementation
 {
   var $_fields = array();
  var $V5e7ec2d5 = array();
@@ -14,8 +11,8 @@ class FileMaker_Record_Implementation
  var $_parent = null;
  function __construct(&$Vc6140495)
  {
- $this->_layout = $Vc6140495;
-$this->_fm = $Vc6140495->_impl->_fm;
+ $this->_layout =& $Vc6140495;
+$this->_fm =& $Vc6140495->_impl->_fm;
 }
  function &getLayout()
  {
@@ -61,7 +58,7 @@ if (FileMaker::isError($V06e3d36f)) {
  return $V06e3d36f;
 }
 switch ($V06e3d36f->getResult()) {
- case 'date':
+ case 'date': 
  $V78f0805f = explode('/', $V2063c160);
 if (count($V78f0805f) != 3) {
  return new FileMaker_Error($this->_fm, 'Failed to parse "' . $V2063c160 . '" as a FileMaker date value.');
@@ -71,7 +68,7 @@ if ($Vd7e6d55b === false) {
  return new FileMaker_Error($this->_fm, 'Failed to convert "' . $V2063c160 . '" to a UNIX timestamp.');
 }
 break;
-case 'time':
+case 'time': 
  $V78f0805f = explode(':', $V2063c160);
 if (count($V78f0805f) != 3) {
  return new FileMaker_Error($this->_fm, 'Failed to parse "' . $V2063c160 . '" as a FileMaker time value.');
@@ -81,7 +78,7 @@ if ($Vd7e6d55b === false) {
  return new FileMaker_Error($this->_fm, 'Failed to convert "' . $V2063c160 . '" to a UNIX timestamp.');
 }
 break;
-case 'timestamp':
+case 'timestamp':  
  $Vd7e6d55b = @strtotime($V2063c160);
 if ($Vd7e6d55b === false) {
  return new FileMaker_Error($this->_fm, 'Failed to convert "' . $V2063c160 . '" to a UNIX timestamp.');
@@ -147,24 +144,24 @@ return $Vde17f0f2;
 }
  function validate($V972bf3f0 = null)
  {
- $V1dccadfe = $this->_fm->newAddCommand($this->_layout->getName(), $this->_fields);
+ $V1dccadfe =& $this->_fm->newAddCommand($this->_layout->getName(), $this->_fields);
 return $V1dccadfe->validate($V972bf3f0);
 }
  function commit()
- {
+ {  
  if ($this->_fm->getProperty('prevalidate')) {
  $V9f7d0ee8 = $this->validate();
 if (FileMaker::isError($V9f7d0ee8)) {
  return $V9f7d0ee8;
 }
-}
+}   
  if (is_null($this->_parent)) {
  if ($this->_recordId) {
  return $this->_commitEdit();
 } else {
  return $this->_commitAdd();
 }
-} else {
+} else {    
  if (!$this->_parent->getRecordId()) {
  return new FileMaker_Error($this->_fm, 'You must commit the parent record first before you can commit its children.');
 }
@@ -179,16 +176,16 @@ if ($this->_recordId) {
  {
  if (empty($this->_recordId)) {
  return new FileMaker_Error($this->_fm, 'You cannot delete a record that does not exist on the server.');
-}
+} 
  if ($this->_parent) {
- $Vd05b6ed7 = array();
+ $Vd05b6ed7 = array(); 
  $V1dccadfe =& $this->_fm->newEditCommand($this->_parent->_impl->_layout->getName(),
  $this->_parent->_impl->_recordId,
- $Vd05b6ed7);
+ $Vd05b6ed7); 
  $V1dccadfe->_impl->_setdeleteRelated($this->_layout->getName().".".$this->_recordId);
 
  return $V1dccadfe->execute();
-}
+} 
  else {
  $Vc6140495 = $this->_layout->getName();
 
@@ -197,17 +194,17 @@ return $V1dccadfe->execute();
 }
 }
  function _commitAdd()
- {
+ { 
  $V1dccadfe =& $this->_fm->newAddCommand($this->_layout->getName(), $this->_fields);
 $Vd1fc8eaf = $V1dccadfe->execute();
 if (FileMaker::isError($Vd1fc8eaf)) {
  return $Vd1fc8eaf;
-}
+} 
  $V6e52c40b =& $Vd1fc8eaf->getRecords();
 return $this->_updateFrom($V6e52c40b[0]);
 }
  function _commitEdit()
- {
+ {  
  foreach ($this->_fields as $V972bf3f0 => $Vd4680e80) {
  foreach ($Vd4680e80 as $V6d786dc7 => $V2063c160) {
  if (isset($this->V5e7ec2d5[$V972bf3f0][$V6d786dc7])) {
@@ -221,23 +218,23 @@ $V1dccadfe =& $this->_fm->newEditCommand($this->_layout->getName(),
 $Vd1fc8eaf = $V1dccadfe->execute();
 if (FileMaker::isError($Vd1fc8eaf)) {
  return $Vd1fc8eaf;
-}
+} 
  $V6e52c40b =& $Vd1fc8eaf->getRecords();
 return $this->_updateFrom($V6e52c40b[0]);
 }
  function _commitAddChild()
- {
+ {  
  $Vd05b6ed7 = array();
 foreach ($this->_fields as $Vb068931c => $Vee0525e4) {
  $Vd05b6ed7[$Vb068931c . '.0'] = $Vee0525e4;
-}
+} 
  $V1dccadfe =& $this->_fm->newEditCommand($this->_parent->_impl->_layout->getName(),
  $this->_parent->getRecordId(),
  $Vd05b6ed7);
 $Vd1fc8eaf = $V1dccadfe->execute();
 if (FileMaker::isError($Vd1fc8eaf)) {
  return $Vd1fc8eaf;
-}
+} 
  $V6e52c40b =& $Vd1fc8eaf->getRecords();
 $Vd0e45878 =& $V6e52c40b[0];
 $V268184c1 =& $Vd0e45878->getRelatedSet($this->_layout->getName());
@@ -245,7 +242,7 @@ $V98bd1c45 = array_pop($V268184c1);
 return $this->_updateFrom($V98bd1c45);
 }
  function _commitEditChild()
- {
+ {  
  foreach ($this->_fields as $V972bf3f0 => $Vee0525e4) {
  foreach ($Vee0525e4 as $V6d786dc7 => $V2063c160) {
  if (!empty($this->V5e7ec2d5[$V972bf3f0][$V6d786dc7])) {
@@ -259,7 +256,7 @@ $V1dccadfe =& $this->_fm->newEditCommand($this->_parent->_impl->_layout->getName
 $Vd1fc8eaf = $V1dccadfe->execute();
 if (FileMaker::isError($Vd1fc8eaf)) {
  return $Vd1fc8eaf;
-}
+} 
  $V6e52c40b =& $Vd1fc8eaf->getRecords();
 $Vd0e45878 =& $V6e52c40b[0];
 $V268184c1 =& $Vd0e45878->getRelatedSet($this->_layout->getName());
@@ -277,29 +274,29 @@ return new FileMaker_Error('Failed to find the updated child in the response.');
 $this->_modificationId = $Vde17f0f2->getModificationId();
 $this->_fields = $Vde17f0f2->_impl->_fields;
 $this->_layout =& $Vde17f0f2->_impl->_layout;
-$this->_relatedSets =& $Vde17f0f2->_impl->_relatedSets;
+$this->_relatedSets =& $Vde17f0f2->_impl->_relatedSets; 
  $this->V5e7ec2d5= array();
 return true;
 }
 
   function getRelatedRecordById($V97f7e518, $Va6ec9c02)
  {
-
+ 
  $Vaca007a7 = $this->getRelatedSet($V97f7e518);
 if(FileMaker::IsError($Vaca007a7)){
-
+ 
  $Vcb5e100e = new FileMaker_Error($this->_fm, 'Related set "' . $Vaca007a7 . '" not present.');
 return $Vcb5e100e;
-}else{
+}else{ 
   foreach ($Vaca007a7 as $V1b7d5726) {
  if( $V1b7d5726->getRecordId() == $Va6ec9c02){
  return $V1b7d5726;
 }
 }
 $Vcb5e100e = new FileMaker_Error($this->_fm, 'Record not present.');
-return $Vcb5e100e;
-
- }
+return $Vcb5e100e;	
+ 
+ } 
  }
 
 }

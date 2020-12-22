@@ -1,5 +1,4 @@
 <?php
-use App\FileMaker;
   class FileMaker_Result_Implementation
 {
   var $_fm;
@@ -8,15 +7,15 @@ use App\FileMaker;
  var $_tableCount;
  var $_foundSetCount;
  var $_fetchCount;
- function __construct($V0ab34ca9)
+ function __construct(&$V0ab34ca9)
  {
- $this->_fm = $V0ab34ca9;
+ $this->_fm = &$V0ab34ca9;
 }
- function getLayout()
+ function &getLayout()
  {
  return $this->_layout;
 }
- function getRecords()
+ function &getRecords()
  {
  return $this->_records;
 }

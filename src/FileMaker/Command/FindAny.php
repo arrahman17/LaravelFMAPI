@@ -12,7 +12,7 @@
  * other intellectual property license or right is granted, either expressly or
  * by implication, by FileMaker.
  */
-use App\FileMaker;
+
 /**#@+
  * @ignore Include parent and delegate classes.
  */
@@ -40,13 +40,12 @@ class FileMaker_Command_FindAny extends FileMaker_Command_Find
      * FindAny command constructor.
      *
      * @ignore
-     * @param FileMaker_Implementation $fm FileMaker_Implementation object the
+     * @param FileMaker_Implementation $fm FileMaker_Implementation object the 
      *        command was created by.
      * @param string $layout Layout to find a random record from.
      */
-    function __construct($fm, $layout)
+    function FileMaker_Command_FindAny($fm, $layout)
     {
-        parent::__construct($fm, $layout);
         $this->_impl = new FileMaker_Command_FindAny_Implementation($fm, $layout);
     }
 

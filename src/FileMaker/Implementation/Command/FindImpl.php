@@ -1,8 +1,5 @@
 <?php
-
-use App\FileMaker;
-
-require_once dirname(__FILE__) . '/../CommandImpl.php';
+  require_once dirname(__FILE__) . '/../CommandImpl.php';
  class FileMaker_Command_Find_Implementation extends FileMaker_Command_Implementation
 {
   var $_findCriteria = array();
@@ -19,29 +16,29 @@ require_once dirname(__FILE__) . '/../CommandImpl.php';
  FileMaker_Command_Implementation::__construct($V0ab34ca9, $Vc6140495);
 }
  function &execute()
- {
- $V21ffce5b = $this->_getCommandParams();
+ { 
+ $V21ffce5b = $this->_getCommandParams(); 
  $this->_setSortParams($V21ffce5b);
 $this->_setRangeParams($V21ffce5b);
-$this->_setRelatedSetsFilters($V21ffce5b);
+$this->_setRelatedSetsFilters($V21ffce5b);   
  if (count($this->_findCriteria) || $this->_recordId) {
  $V21ffce5b['-find'] = true;
 } else {
  $V21ffce5b['-findall'] = true;
-}
+} 
  if ($this->_recordId) {
  $V21ffce5b['-recid'] = $this->_recordId;
-}
+} 
  if ($this->Vf951bdce) {
  $V21ffce5b['-lop'] = $this->Vf951bdce;
-}
+} 
  foreach ($this->_findCriteria as $Vd1148ee8 => $Ve9de89b0) {
  $V21ffce5b[$Vd1148ee8] = $Ve9de89b0;
-}
+} 
  $V0f635d0e = $this->_fm->_execute($V21ffce5b);
 if (FileMaker::isError($V0f635d0e)) {
  return $V0f635d0e;
-}
+} 
  return $this->_getResult($V0f635d0e);
 }
  function addFindCriterion($Vd1148ee8, $Ve9de89b0)
