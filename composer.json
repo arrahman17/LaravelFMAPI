@@ -1,0 +1,19 @@
+{
+    "name": "netmarket/filemakapi",
+    "description": "A filemaker API package for Laravel.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Abdur Rahman",
+            "email": "abdur.rahman@netmarket.de"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Netmarket\\Filemakapi\\": "/src"
+        }
+    },
+    "require": {}
+}
